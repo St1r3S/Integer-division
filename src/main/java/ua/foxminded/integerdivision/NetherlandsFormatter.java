@@ -9,15 +9,18 @@ public class NetherlandsFormatter implements Formatter {
         StringBuilder resultString = new StringBuilder();
         int divisorLengthPlusThree = String.valueOf(result.getDivisor()).length() + 3;
         int spacesQuantity = 0;
+        int lastMinuendIndex = result.getMinuendList().size() - 1;
+        int lastSubtrahendIndex = result.getSubtrahendList().size() - 1;
+
         if (Integer.signum(result.getDividend()) < 0) {
             spacesQuantity++;
             divisorLengthPlusThree += spacesQuantity;
         }
         if (!result.getMinuendList().isEmpty() && !result.getSubtrahendList().isEmpty()) {
             resultString.append(result.getDivisor()).append(" / ").append(result.getDividend()).append(" \\ ").append(result.getQuotient()).append("\n");
-            resultString.append(repeatCharacter(String.valueOf(result.getDivisor()).length() + 3 + spacesQuantity, ' ')).append(result.getSubtrahendList().getFirst()).append("\n");
+            resultString.append(repeatCharacter(String.valueOf(result.getDivisor()).length() + 3 + spacesQuantity, ' ')).append(result.getSubtrahendList().get(0)).append("\n");
             resultString.append(repeatCharacter(divisorLengthPlusThree, ' '));
-            resultString.append(repeatCharacter(String.valueOf(result.getMinuendList().getFirst()).length(), '-')).append("\n");
+            resultString.append(repeatCharacter(String.valueOf(result.getMinuendList().get(0)).length(), '-')).append("\n");
             int i;
             for (i = 1; i < result.getMinuendList().size(); i++) {
                 resultString.append(repeatCharacter(i + divisorLengthPlusThree, ' ')).append(result.getMinuendList().get(i)).append("\n");
@@ -25,7 +28,7 @@ public class NetherlandsFormatter implements Formatter {
                 resultString.append(repeatCharacter(i + divisorLengthPlusThree, ' '));
                 resultString.append(repeatCharacter(String.valueOf(result.getMinuendList().get(i)).length(), '-')).append("\n");
             }
-            if (result.getDividend() - result.getDivisor() * result.getQuotient() == result.getReminder() && result.getMinuendList().getLast() - result.getSubtrahendList().getLast() == 0) {
+            if (result.getDividend() - result.getDivisor() * result.getQuotient() == result.getReminder() && result.getMinuendList().get(lastMinuendIndex) - result.getSubtrahendList().get(lastSubtrahendIndex) == 0) {
                 resultString.append(repeatCharacter(1 + spacesQuantity, ' '));
                 if (Integer.signum(result.getDivisor()) < 0) {
                     spacesQuantity++;

@@ -4,6 +4,11 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
+
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -12,37 +17,44 @@ class CalculatorTest {
 
     @Test
     void shouldVerifyDividendEqualsDivisor() {
-        assertEquals("Result(dividend=15, divisor=15, quotient=1, reminder=0, subtrahendList=[15], minuendList=[15])", calculator.divide(15, 15).toString());
+        Result result = new Result(15, 15, 1, 0, Arrays.asList(15), Arrays.asList(15));
+        assertEquals(result, calculator.divide(15, 15));
     }
 
     @Test
     void shouldVerifyDividendLessThanDivisor() {
-        assertEquals("Result(dividend=15, divisor=45, quotient=0, reminder=15, subtrahendList=[], minuendList=[])", calculator.divide(15, 45).toString());
+        Result result = new Result(15, 45, 0, 15, Arrays.asList(), Arrays.asList());
+        assertEquals(result, calculator.divide(15, 45));
     }
 
     @Test
     void shouldVerifyDividendGreaterThanDivisor() {
-        assertEquals("Result(dividend=7485, divisor=5, quotient=1497, reminder=0, subtrahendList=[5, 20, 45, 35], minuendList=[7, 24, 48, 35])", calculator.divide(7485, 5).toString());
+        Result result = new Result(7485, 5, 1497, 0, Arrays.asList(5, 20, 45, 35), Arrays.asList(7, 24, 48, 35));
+        assertEquals(result, calculator.divide(7485, 5));
     }
 
     @Test
     void shouldVerifyDividendGreaterThanDivisorAndReminderFilled() {
-        assertEquals("Result(dividend=7485, divisor=6, quotient=1247, reminder=3, subtrahendList=[6, 12, 24, 42], minuendList=[7, 14, 28, 45])", calculator.divide(7485, 6).toString());
+        Result result = new Result(7485, 6, 1247, 3, Arrays.asList(6, 12, 24, 42), Arrays.asList(7, 14, 28, 45));
+        assertEquals(result, calculator.divide(7485, 6));
     }
 
     @Test
     void shouldVerifyDividendEqualsOneAndDivisorEqualsOneHundred() {
-        assertEquals("Result(dividend=1, divisor=100, quotient=0, reminder=1, subtrahendList=[], minuendList=[])", calculator.divide(1, 100).toString());
+        Result result = new Result(1, 100, 0, 1, Arrays.asList(), Arrays.asList());
+        assertEquals(result, calculator.divide(1, 100));
     }
 
     @Test
     void shouldVerifyNegativeDividendAndPositiveDivisor() {
-        assertEquals("Result(dividend=-2081, divisor=15, quotient=-138, reminder=11, subtrahendList=[15, 45, 120], minuendList=[20, 58, 131])", calculator.divide(-2081, 15).toString());
+        Result result = new Result(-2081, 15, -138, 11, Arrays.asList(15, 45, 120), Arrays.asList(20, 58, 131));
+        assertEquals(result, calculator.divide(-2081, 15));
     }
 
     @Test
     void shouldVerifyPositiveDividendAndNegativeDivisor() {
-        assertEquals("Result(dividend=2081, divisor=-15, quotient=-138, reminder=11, subtrahendList=[15, 45, 120], minuendList=[20, 58, 131])", calculator.divide(2081, -15).toString());
+        Result result = new Result(2081, -15, -138, 11, Arrays.asList(15, 45, 120), Arrays.asList(20, 58, 131));
+        assertEquals(result, calculator.divide(2081, -15));
     }
 
     @ParameterizedTest

@@ -14,12 +14,12 @@ public class EurasiaFormatter implements Formatter {
         if (!result.getMinuendList().isEmpty() && !result.getSubtrahendList().isEmpty()) {
             resultString.append("_").append(result.getDividend()).append(repeatCharacter(spacesQuantity - 1, ' ')).append("|").append(result.getDivisor()).append("\n");
             resultString.append(repeatCharacter(spacesQuantity, ' '));
-            resultString.append(repeatCharacter(String.valueOf(result.getMinuendList().getFirst()).length() - String.valueOf(result.getSubtrahendList().getFirst()).length(), ' '));
-            resultString.append(result.getSubtrahendList().getFirst());
-            int stringDelta = String.valueOf(result.getDividend()).length() - String.valueOf(result.getSubtrahendList().getFirst()).length();
+            resultString.append(repeatCharacter(String.valueOf(result.getMinuendList().get(0)).length() - String.valueOf(result.getSubtrahendList().get(0)).length(), ' '));
+            resultString.append(result.getSubtrahendList().get(0));
+            int stringDelta = String.valueOf(result.getDividend()).length() - String.valueOf(result.getSubtrahendList().get(0)).length();
             resultString.append(repeatCharacter(stringDelta, ' ')).append("|");
             resultString.append(repeatCharacter(String.valueOf(result.getQuotient()).length(), '-')).append("\n");
-            resultString.append(repeatCharacter(spacesQuantity, ' ')).append(repeatCharacter(String.valueOf(result.getMinuendList().getFirst()).length(), '-'));
+            resultString.append(repeatCharacter(spacesQuantity, ' ')).append(repeatCharacter(String.valueOf(result.getMinuendList().get(0)).length(), '-'));
             resultString.append(repeatCharacter(stringDelta, ' ')).append("|").append(result.getQuotient()).append("\n");
             int i;
             for (i = 1; i < result.getMinuendList().size(); i++) {
